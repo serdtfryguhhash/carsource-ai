@@ -3,7 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Car, Wrench, Gauge, ArrowRight, Zap, TrendingUp, Volume2, ChevronRight } from "lucide-react";
+import {
+  Car, Wrench, Gauge, ArrowRight, Zap, TrendingUp, Volume2,
+  ChevronRight, Trophy, Users, Layers, BookOpen, Eye, Settings
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +15,10 @@ import { modParts, getPopularParts } from "@/data/parts";
 import VehicleSelectCard from "@/components/features/vehicle-select-card";
 import PartCard from "@/components/features/part-card";
 import HeroSection from "@/components/features/hero-section";
+import XPBar from "@/components/shared/XPBar";
+import StreakBadge from "@/components/shared/StreakBadge";
+import AchievementToast from "@/components/shared/AchievementToast";
+import { useAppStore } from "@/stores";
 import type { ModCategory } from "@/types";
 
 const fadeInUp = {
@@ -54,6 +61,15 @@ const steps = [
   },
 ];
 
+const quickLinks = [
+  { href: "/garage", icon: Car, label: "My Garage", color: "text-red-400", bg: "bg-red-500/10" },
+  { href: "/build-planner", icon: Layers, label: "Build Planner", color: "text-orange-400", bg: "bg-orange-500/10" },
+  { href: "/diary", icon: BookOpen, label: "Mod Diary", color: "text-purple-400", bg: "bg-purple-500/10" },
+  { href: "/community", icon: Users, label: "Community", color: "text-blue-400", bg: "bg-blue-500/10" },
+  { href: "/maintenance", icon: Settings, label: "Maintenance", color: "text-green-400", bg: "bg-green-500/10" },
+  { href: "/watchlist", icon: Eye, label: "Watchlist", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+];
+
 const modCategories: { name: ModCategory; icon: typeof Wrench; description: string }[] = [
   { name: "Engine", icon: Zap, description: "Internal engine upgrades" },
   { name: "Exhaust", icon: Volume2, description: "Headers, downpipes, cat-backs" },
@@ -64,6 +80,20 @@ const modCategories: { name: ModCategory; icon: typeof Wrench; description: stri
 ];
 
 export default function HomePage() {
+  const recordVisit = useAppStore((s) => s.recordVisit);
+  const communityBuilds = useAppStore((s) => s.communityBuilds);
+  const userVehicles = useAppStore((s) => s.vehicles);
+  const xp = useAppStore((s) => s.xp);
+  const streak = useAppStore((s) => s.streak);
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    recordVisit();
+  }, [recordVisit]);
+
+  const featuredBuild = communityBuilds.find((b) => b.featured) || communityBuilds[0];
   const popularVehicles = vehicles.slice(0, 8);
 
   let popularParts: typeof modParts = [];
@@ -78,8 +108,99 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#0d1117]">
+      <AchievementToast />
+
       {/* Hero Section */}
       <HeroSection />
+
+      {/* User Dashboard (only if they have activity) */}
+      {mounted && (xp > 0 || userVehicles.length > 0 || streak.currentStreak > 0) && (
+        <section className="py-8 px-4">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-4"
+            >
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold text-white">Your Progress</h2>
+                <StreakBadge />
+              </div>
+              <XPBar />
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* Quick Links */}
+      <section className="py-8 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+            className="grid grid-cols-3 md:grid-cols-6 gap-3"
+          >
+            {quickLinks.map((link) => (
+              <motion.div key={link.href} variants={fadeInUp} transition={{ duration: 0.3 }}>
+                <Link href={link.href}>
+                  <Card className="bg-white/5 border-white/10 hover:border-red-500/30 transition-all cursor-pointer card-glow h-full">
+                    <CardContent className="p-4 text-center">
+                      <div className={`w-10 h-10 rounded-xl ${link.bg} flex items-center justify-center mx-auto mb-2`}>
+                        <link.icon className={`w-5 h-5 ${link.color}`} />
+                      </div>
+                      <p className="text-xs font-medium text-zinc-300">{link.label}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Featured Community Build */}
+      {mounted && featuredBuild && (
+        <section className="py-8 px-4">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <Trophy className="w-5 h-5 text-yellow-400" />
+                <h2 className="text-lg font-bold text-white">Featured Community Build</h2>
+              </div>
+              <Link href="/community">
+                <Card className="bg-gradient-to-r from-yellow-500/5 to-orange-500/5 border-yellow-500/20 hover:border-yellow-500/40 transition-all cursor-pointer">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Badge className="bg-yellow-500/10 text-yellow-400 border-yellow-500/20 text-xs mb-2">
+                          <Trophy className="w-3 h-3 mr-1" /> Build of the Week
+                        </Badge>
+                        <h3 className="text-xl font-bold text-white">{featuredBuild.vehicleName}</h3>
+                        <p className="text-sm text-zinc-500">by {featuredBuild.userName}</p>
+                        <div className="flex gap-4 mt-2">
+                          <span className="text-sm text-green-400 font-medium">{featuredBuild.currentHP} HP</span>
+                          <span className="text-sm text-yellow-400">${featuredBuild.totalInvested.toLocaleString()}</span>
+                          <span className="text-sm text-zinc-400">{featuredBuild.modList.length} mods</span>
+                          <span className="text-sm text-blue-400">{featuredBuild.upvotes} upvotes</span>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-6 h-6 text-zinc-600" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* How It Works */}
       <section className="py-24 px-4">

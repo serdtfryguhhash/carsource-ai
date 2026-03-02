@@ -7,7 +7,7 @@ const anthropic = new Anthropic({
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, vehicle } = await request.json();
+    const { message, vehicle, userContext } = await request.json();
 
     if (!message) {
       return NextResponse.json(
@@ -16,10 +16,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const response = await anthropic.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      system: `You are ModGarage's expert automotive modification assistant. You specialize in:
+    // Build system prompt with AI memory context
+    let systemPrompt = `You are ModGarage's expert automotive modification assistant. You specialize in:
 - Recommending the best mods for specific vehicles
 - Explaining what each modification does and its real-world gains
 - Build path advice (what order to install mods)
@@ -31,7 +29,19 @@ export async function POST(request: NextRequest) {
 
 Be specific, use real brand names, and give accurate HP/torque numbers. Be enthusiastic about cars but also practical about budgets and safety.
 
-${vehicle ? `The user is asking about: ${vehicle}` : ""}`,
+${vehicle ? `The user is asking about: ${vehicle}` : ""}`;
+
+    // Inject AI memory context if provided
+    if (userContext) {
+      systemPrompt += `\n\n${userContext}
+
+Use this context to personalize your advice. Reference their specific vehicles, installed mods, and goals when relevant. If they have a budget range, keep recommendations within it. If they have preferred brands, prioritize those.`;
+    }
+
+    const response = await anthropic.messages.create({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1000,
+      system: systemPrompt,
       messages: [{ role: "user", content: message }],
     });
 

@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Wrench, Menu, X, Gauge, Box, Hammer, Bot } from "lucide-react";
+import {
+  Wrench, Menu, Gauge, Box, Hammer, Bot, Layers, BookOpen,
+  Users, Settings, Eye
+} from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -15,8 +18,11 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/garage", label: "My Garage", icon: Gauge },
-  { href: "/parts", label: "Parts", icon: Box },
-  { href: "/build", label: "Build", icon: Hammer },
+  { href: "/build-planner", label: "Build Planner", icon: Layers },
+  { href: "/diary", label: "Diary", icon: BookOpen },
+  { href: "/community", label: "Community", icon: Users },
+  { href: "/maintenance", label: "Maintenance", icon: Settings },
+  { href: "/watchlist", label: "Watchlist", icon: Eye },
   { href: "/advisor", label: "AI Advisor", icon: Bot },
 ];
 
@@ -37,7 +43,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href || pathname?.startsWith(link.href + "/");
             return (
@@ -45,7 +51,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                  "flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                   isActive
                     ? "text-red-500 bg-red-500/10"
                     : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -60,7 +66,7 @@ export default function Navbar() {
 
         {/* Mobile Hamburger */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild className="md:hidden">
+          <SheetTrigger asChild className="lg:hidden">
             <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
