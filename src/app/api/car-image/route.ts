@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   try {
     const wikiRes = await fetch(
       `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`,
-      { headers: { "User-Agent": "ModGarage/1.0 (automotive education app)" } }
+      { headers: { "User-Agent": "CarSourceAI/1.0 (automotive education app)" } }
     );
     if (wikiRes.ok) {
       const data = await wikiRes.json();

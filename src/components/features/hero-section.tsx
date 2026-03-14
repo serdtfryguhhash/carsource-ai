@@ -77,7 +77,7 @@ export default function HeroSection() {
               size="lg"
               className="border-white/15 text-gray-300 hover:text-white hover:border-white/30 text-base px-8 py-6 rounded-xl"
             >
-              <Link href="/parts">
+              <Link href="/garage">
                 Browse All Parts
               </Link>
             </Button>

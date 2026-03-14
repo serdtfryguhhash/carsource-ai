@@ -7,7 +7,7 @@ import Footer from "@/components/layout/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ModGarage — Find the Best Mods for Your Car",
+  title: "CarSource AI - Find the Best Mods for Your Car",
   description: "Select your car and discover the best performance modifications. See HP gains, torque increases, and build your dream setup.",
 };
 

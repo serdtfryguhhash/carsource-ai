@@ -80,12 +80,13 @@ export default function PartCard({ part, index = 0 }: { part: any; index?: numbe
       <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden card-glow transition-all duration-300 group-hover:border-red-500/30 flex flex-col h-full">
         {/* Part Image */}
         <div className="relative h-40 bg-gradient-to-br from-white/5 to-transparent overflow-hidden">
-          {part.image ? (
+          {(part.image_url || part.image) ? (
             <Image
-              src={part.image}
+              src={part.image_url || part.image}
               alt={part.name}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
+              unoptimized
             />
           ) : (
             <div className="flex items-center justify-center h-full text-gray-600">

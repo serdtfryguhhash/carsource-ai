@@ -52,5 +52,5 @@ export function buildAIContext(): string {
 
   if (parts.length === 0) return '';
 
-  return `\n\nUSER CONTEXT (from their ModGarage profile):\n${parts.join('\n')}`;
+  return `\n\nUSER CONTEXT (from their CarSource AI profile):\n${parts.join('\n')}`;
 }

@@ -46,7 +46,7 @@ const steps = [
   {
     icon: Wrench,
     title: "Choose Your Mods",
-    description: "Browse performance parts by category — intakes, exhausts, turbos, suspension, and more.",
+    description: "Browse performance parts by category: intakes, exhausts, turbos, suspension, and more.",
     color: "text-orange-500",
     bg: "bg-orange-500/10",
     border: "border-orange-500/20",
@@ -221,7 +221,7 @@ export default function HomePage() {
               <span className="gradient-text">3 Simple Steps</span>
             </h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              From stock to built — see exactly what each mod does to your car before you buy.
+              From stock to built - see exactly what each mod does to your car before you buy.
             </p>
           </motion.div>
 

@@ -10,14 +10,14 @@ const footerLinks = {
     { label: "All Vehicles", href: "/garage" },
   ],
   Parts: [
-    { label: "Engine", href: "/parts?category=engine" },
-    { label: "Exhaust", href: "/parts?category=exhaust" },
-    { label: "Turbo & Supercharger", href: "/parts?category=turbo" },
-    { label: "Suspension", href: "/parts?category=suspension" },
-    { label: "All Parts", href: "/parts" },
+    { label: "Engine", href: "/garage" },
+    { label: "Exhaust", href: "/garage" },
+    { label: "Turbo & Supercharger", href: "/garage" },
+    { label: "Suspension", href: "/garage" },
+    { label: "All Parts", href: "/garage" },
   ],
   Resources: [
-    { label: "Build Planner", href: "/build" },
+    { label: "Build Planner", href: "/build-planner" },
     { label: "AI Advisor", href: "/advisor" },
     { label: "My Garage", href: "/garage" },
   ],
@@ -33,8 +33,8 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-2">
               <Wrench className="h-5 w-5 text-red-500" />
               <span className="text-lg font-bold">
-                <span className="text-red-500">Mod</span>
-                <span className="text-white">Garage</span>
+                <span className="text-red-500">CarSource</span>
+                <span className="text-white"> AI</span>
               </span>
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed">
@@ -67,7 +67,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-gray-600">
-            &copy; {new Date().getFullYear()} ModGarage. All rights reserved.
+            &copy; {new Date().getFullYear()} CarSource AI. All rights reserved.
           </p>
           <p className="text-xs text-gray-600">
             Built for car enthusiasts, by car enthusiasts.

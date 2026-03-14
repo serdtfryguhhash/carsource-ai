@@ -37,8 +37,8 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2 group">
           <Wrench className="h-6 w-6 text-red-500 group-hover:rotate-12 transition-transform" />
           <span className="text-xl font-bold tracking-tight">
-            <span className="text-red-500">Mod</span>
-            <span className="text-white">Garage</span>
+            <span className="text-red-500">CarSource</span>
+            <span className="text-white"> AI</span>
           </span>
         </Link>
 
@@ -82,8 +82,8 @@ export default function Navbar() {
               <div className="flex items-center gap-2 p-6 border-b border-white/10">
                 <Wrench className="h-5 w-5 text-red-500" />
                 <span className="text-lg font-bold">
-                  <span className="text-red-500">Mod</span>
-                  <span className="text-white">Garage</span>
+                  <span className="text-red-500">CarSource</span>
+                  <span className="text-white"> AI</span>
                 </span>
               </div>
 

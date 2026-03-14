@@ -34,7 +34,7 @@ export default function ShareCard({
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(() => {
-    const text = `${vehicleName} Build Spec\n${totalHP}HP | $${totalInvested.toLocaleString()} invested\nMods: ${modList.join(', ')}\nBuilt with ModGarage`;
+    const text = `${vehicleName} Build Spec\n${totalHP}HP | $${totalInvested.toLocaleString()} invested\nMods: ${modList.join(', ')}\nBuilt with CarSource AI`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -50,7 +50,7 @@ export default function ShareCard({
         <div className="bg-gradient-to-r from-red-600 to-orange-500 p-4">
           <div className="flex items-center gap-2">
             <Wrench className="w-5 h-5 text-white" />
-            <span className="text-white font-bold text-sm">ModGarage</span>
+            <span className="text-white font-bold text-sm">CarSource AI</span>
           </div>
         </div>
 
@@ -109,7 +109,7 @@ export default function ShareCard({
           <div className="pt-3 border-t border-white/5 flex items-center justify-between">
             <div className="flex items-center gap-1.5">
               <Wrench className="w-3.5 h-3.5 text-red-500" />
-              <span className="text-xs text-zinc-500">Built with <span className="text-red-400">ModGarage</span></span>
+              <span className="text-xs text-zinc-500">Built with <span className="text-red-400">CarSource AI</span></span>
             </div>
             <span className="text-xs text-zinc-600">{modList.length} mods</span>
           </div>

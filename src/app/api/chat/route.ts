@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Build system prompt with AI memory context
-    let systemPrompt = `You are ModGarage's expert automotive modification assistant. You specialize in:
+    let systemPrompt = `You are CarSource AI's expert automotive modification assistant. You specialize in:
 - Recommending the best mods for specific vehicles
 - Explaining what each modification does and its real-world gains
 - Build path advice (what order to install mods)

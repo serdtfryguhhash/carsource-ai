@@ -33,12 +33,13 @@ export default function VehicleSelectCard({ vehicle, index = 0 }: { vehicle: any
         <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden card-glow transition-all duration-300 group-hover:scale-[1.02] group-hover:border-red-500/40">
           {/* Vehicle Image */}
           <div className="relative h-48 bg-gradient-to-br from-white/5 to-transparent overflow-hidden">
-            {vehicle.image ? (
+            {(vehicle.image_url || vehicle.image) ? (
               <Image
-                src={vehicle.image}
+                src={vehicle.image_url || vehicle.image}
                 alt={`${vehicle.make} ${vehicle.model}`}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
+                unoptimized
               />
             ) : (
               <div className="flex items-center justify-center h-full text-gray-600">

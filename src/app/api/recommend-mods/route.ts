@@ -94,7 +94,7 @@ ${currentMods ? `Current Mods Already Installed: ${currentMods}` : "Currently st
 export async function GET() {
   return NextResponse.json({
     status: "ok",
-    service: "ModGarage AI Advisor",
+    service: "CarSource AI Advisor",
     hasKey: !!process.env.ANTHROPIC_API_KEY,
   });
 }

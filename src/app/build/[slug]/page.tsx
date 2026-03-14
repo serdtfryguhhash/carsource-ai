@@ -978,7 +978,7 @@ function BuildSummarySidebar({
       `Total Build Cost: $${totalCost.toLocaleString()}`,
       totalHpGain > 0 ? `Cost per HP: $${costPerHp}/HP` : null,
       ``,
-      `Built with ModGarage`,
+      `Built with CarSource AI`,
     ].filter(Boolean);
 
     navigator.clipboard.writeText(lines.join("\n")).then(() => {

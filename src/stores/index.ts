@@ -260,11 +260,84 @@ const DEFAULT_ACHIEVEMENTS: Achievement[] = [
   { id: 'streak-7', name: 'Week Warrior', description: 'Visit 7 days in a row', icon: '🔥', unlockedAt: null, requirement: '7-day streak' },
 ];
 
+const SAMPLE_VEHICLES: UserVehicle[] = [
+  {
+    id: 'sample-1',
+    year: '2021',
+    make: 'Toyota',
+    model: 'GR Supra',
+    trim: '3.0 Premium',
+    color: 'Renaissance Red',
+    currentHP: 442,
+    currentTorque: 428,
+    installedMods: [
+      { id: 'sm-1', partId: 'p1', partName: 'BMS Stage 1 Intake', category: 'Intake', hpGain: 15, torqueGain: 12, cost: 329, installedDate: '2025-08-15', notes: '' },
+      { id: 'sm-2', partId: 'p2', partName: 'Downpipe Catless 4"', category: 'Exhaust', hpGain: 25, torqueGain: 30, cost: 650, installedDate: '2025-09-02', notes: '' },
+      { id: 'sm-3', partId: 'p3', partName: 'MHD Stage 2 Tune', category: 'ECU & Tuning', hpGain: 20, torqueGain: 18, cost: 499, installedDate: '2025-09-10', notes: '' },
+    ],
+    maintenanceLog: [],
+    dynoResults: [
+      { id: 'dr-1', date: '2025-09-15', hp: 438, torque: 425, notes: '91 octane, Stage 2 tune' },
+    ],
+    notes: 'Weekend track car. Going for 500whp next season.',
+    dateAdded: '2025-07-20',
+    vehicleSlug: 'toyota-gr-supra-a90',
+    imageUrl: '/api/car-image?name=Toyota_GR_Supra',
+    drivetrain: 'RWD',
+    engineCode: 'B58 3.0T I6',
+  },
+  {
+    id: 'sample-2',
+    year: '2019',
+    make: 'Honda',
+    model: 'Civic Type R',
+    trim: 'Type R',
+    color: 'Championship White',
+    currentHP: 346,
+    currentTorque: 335,
+    installedMods: [
+      { id: 'sm-4', partId: 'p4', partName: 'PRL Cobra Cold Air Intake', category: 'Intake', hpGain: 12, torqueGain: 10, cost: 399, installedDate: '2025-06-10', notes: '' },
+      { id: 'sm-5', partId: 'p5', partName: 'AWE Touring Exhaust', category: 'Exhaust', hpGain: 8, torqueGain: 10, cost: 1150, installedDate: '2025-07-01', notes: '' },
+      { id: 'sm-6', partId: 'p6', partName: 'Hondata FlashPro', category: 'ECU & Tuning', hpGain: 20, torqueGain: 20, cost: 695, installedDate: '2025-07-15', notes: '' },
+    ],
+    maintenanceLog: [],
+    dynoResults: [],
+    notes: 'Daily driver. Keeping it reliable with bolt-ons only.',
+    dateAdded: '2025-06-01',
+    vehicleSlug: 'honda-civic-type-r-fk8',
+    imageUrl: '/api/car-image?name=Honda_Civic_Type_R',
+    drivetrain: 'FWD',
+    engineCode: 'K20C1 2.0T',
+  },
+  {
+    id: 'sample-3',
+    year: '2023',
+    make: 'Toyota',
+    model: 'GR86',
+    trim: 'Premium',
+    color: 'Trueno Blue',
+    currentHP: 248,
+    currentTorque: 200,
+    installedMods: [
+      { id: 'sm-7', partId: 'p7', partName: 'JDL UEL Header', category: 'Exhaust', hpGain: 12, torqueGain: 10, cost: 899, installedDate: '2025-10-01', notes: '' },
+      { id: 'sm-8', partId: 'p8', partName: 'Ecutek Stage 1 Tune', category: 'ECU & Tuning', hpGain: 8, torqueGain: 6, cost: 550, installedDate: '2025-10-10', notes: '' },
+    ],
+    maintenanceLog: [],
+    dynoResults: [],
+    notes: 'Canyon carver. Suspension mods coming next.',
+    dateAdded: '2025-09-15',
+    vehicleSlug: 'toyota-gr86',
+    imageUrl: '/api/car-image?name=Toyota_GR86',
+    drivetrain: 'RWD',
+    engineCode: 'FA24 2.4L NA',
+  },
+];
+
 export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       // Garage
-      vehicles: [],
+      vehicles: SAMPLE_VEHICLES,
       addVehicle: (vehicle) =>
         set((state) => ({ vehicles: [...state.vehicles, vehicle] })),
       removeVehicle: (id) =>
@@ -529,7 +602,7 @@ export const useAppStore = create<AppState>()(
         })),
     }),
     {
-      name: 'modgarage-storage',
+      name: 'carsource-ai-storage',
       version: 1,
     }
   )

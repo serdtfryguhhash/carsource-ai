@@ -127,7 +127,7 @@ export default function AdvisorPage() {
               AI Mod <span className="gradient-text">Advisor</span>
             </h1>
             <p className="text-zinc-400 text-lg max-w-xl mx-auto">
-              Tell us about your car and goals — we&apos;ll recommend the perfect mods
+              Tell us about your car and goals. We&apos;ll recommend the perfect mods
               with a prioritized build path.
             </p>
           </motion.div>
@@ -161,7 +161,7 @@ export default function AdvisorPage() {
                           value={v.slug}
                           className="text-zinc-300 focus:bg-red-500/10 focus:text-white"
                         >
-                          {v.make} {v.model} ({v.years}) — {v.engine_code}
+                          {v.make} {v.model} ({v.years}) - {v.engine_code}
                         </SelectItem>
                       ))}
                     </SelectContent>
